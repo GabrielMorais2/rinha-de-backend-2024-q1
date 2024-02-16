@@ -1,5 +1,11 @@
 CREATE DATABASE rinha_backend;
 
+CREATE TABLE cliente (
+    id SERIAL PRIMARY KEY,
+    limite BIGINT NOT NULL,
+    saldo BIGINT NOT NULL
+);
+
 INSERT INTO cliente (id, limite, saldo)
 VALUES
     (1, 100000, 0),

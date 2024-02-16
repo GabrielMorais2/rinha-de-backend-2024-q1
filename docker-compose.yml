@@ -3,21 +3,21 @@ version: "3.8"
 services:
 
   postgres-rinha:
-    image: postgres
+    image: postgres:16-alpine
     container_name: postgres-rinha
-    restart: always
     environment:
+      - POSTGRES_DB=rinha-backend
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     ports:
       - "5434:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '220MB'
     volumes:
-      - ./init-scripts:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U root -d postgres-rinha" ]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+      - ./docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - spring
 
@@ -29,7 +29,17 @@ services:
     depends_on:
       - postgres-rinha
     environment:
+      - SERVER_PORT=8080
       - POSTGRES_HOST=postgres-rinha
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '150MB'
     networks:
       - spring
 
@@ -47,6 +57,11 @@ services:
       - api2
     ports:
       - "9999:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '30MB'
     networks:
       - spring
 

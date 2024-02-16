@@ -1,13 +1,12 @@
-server:
-  compression:
-    enabled: true
-    min-response-size: 1024
-  port: ${SERVER_PORT:9999}
-  tomcat:
-    connection-timeout : 120000
-    max-connections: 1000
+logging:
+  level:
+    root: WARN
 
 spring:
+  application:
+    name: rinha-de-backend-java
+  banner:
+    location: rinha-java.txt
   sql:
     init:
       mode: always
@@ -18,8 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show_sql: true
     defer-datasource-initialization: true
+  mvc:
+    async:
+      request-timeout: 600000

@@ -3,12 +3,12 @@
 # Use este script para executar testes locais
 
 RESULTS_WORKSPACE="$(pwd)/load-test/user-files/results"
-GATLING_BIN_DIR=$HOME/Downloads/gatling-3.10.3/bin
+GATLING_BIN_DIR="C:\gatling\bin"
 GATLING_WORKSPACE="$(pwd)/load-test/user-files"
 
 runGatling() {
     sh $GATLING_BIN_DIR/gatling.sh -rm local -s RinhaBackendCrebitosSimulation \
-        -rd "Rinha de Backend - 2024/Q1: Crédito" \
+        -rd "Rinha de Backend - 2024/Q1: Crébito" \
         -rf $RESULTS_WORKSPACE \
         -sf "$GATLING_WORKSPACE/simulations"
 }

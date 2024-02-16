@@ -4,13 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class Cliente {
 
@@ -21,4 +16,38 @@ public class Cliente {
     private long limite;
     private long saldo;
 
+    public Cliente(Integer id, long limite, long saldo) {
+        this.id = id;
+        this.limite = limite;
+        this.saldo = saldo;
+    }
+
+    public Cliente() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public long getLimite() {
+        return limite;
+    }
+
+    public long getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(long saldo) {
+        this.saldo = saldo;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", limite=" + limite +
+                ", saldo=" + saldo +
+                '}';
+    }
 }
